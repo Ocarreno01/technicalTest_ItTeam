@@ -1,0 +1,46 @@
+<div class="container">
+    <mat-toolbar class="text-center">
+        <span>Explora TechWorld</span>
+    </mat-toolbar>
+
+    <form [ngClass]="{'centered-form': !result.length, 'moved-form': result.length}"
+        class="text-center search-form mt-4" (ngSubmit)="searchImages()" (keyup.enter)="searchImages()">
+        <mat-form-field class="form-group">
+            <mat-label>Palabra Clave:</mat-label>
+            <input maxlength="100" matInput type="text" id="keyWord" [(ngModel)]="keyWord" name="keyWord" required>
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+            <mat-label>Categoría:</mat-label>
+            <mat-select name="category" [(ngModel)]="category">
+                <mat-option [value]="">Seleccione</mat-option>
+                <mat-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="form-group">
+            <button *ngIf="!result.length" mat-raised-button type="submit" class="btn btn-secondary">Buscar</button>
+            <button *ngIf="result.length" mat-raised-button type="submit" class="btn btn-secondary">Buscar de
+                nuevo</button>
+        </div>
+    </form>
+
+    <div *ngIf="result.length > 0" class="mt-4 results-container">
+        <h2 class="text-center white">Resultados:</h2>
+        <div class="row">
+            <div *ngFor="let image of result" class="col-md-6 result-item text-center">
+                <img [src]="image.largeImageURL" alt="Imagen de TechWorld"
+                    class="img-fluid mx-auto img-position pointer" (click)="imageOnClick(image)">
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="(result?.length === 0 || !result?.length) && submitted && !loading" class="mt-4 results-container">
+        <h2 class="text-center white">No se encontraron result</h2>
+    </div>
+
+    <div *ngIf="(result?.length === 0 || !result?.length) && submitted && loading" class="loader-overlay">
+        <div class="loader"></div>
+    </div>
+
+</div>

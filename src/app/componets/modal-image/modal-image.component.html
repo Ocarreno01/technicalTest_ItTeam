@@ -1,0 +1,32 @@
+<div class="modal-header">
+    <h2 class="modal-title">Informaciòn adicional:</h2>
+    <button type="button" class="btn btn-secondary" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <div class="content-container">
+        <div class="preview-container">
+            <img [src]="data.webformatURL" alt="Vista previa de la imagen" class="img-fluid">
+        </div>
+        <div class="info-container">
+            <div class="info-section">
+                <strong>Tags: </strong>
+                <span>{{ data.tags }}</span>
+            </div>
+            <div class="info-section">
+                <strong>Cantidad de Vistas: </strong>
+                <span>{{ data.views }}</span>
+            </div>
+            <div class="info-section">
+                <strong>Cantidad de Likes: </strong>
+                <span>{{ data.likes }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+</div>
